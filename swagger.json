@@ -204,7 +204,60 @@
                     }
                 }
             }
-        }
-        
+        },
+        "/v1/api/interview/{user_id}": {
+            "post": {
+              "tags": [
+                "Interview"
+              ],
+              "summary": "Interview Create",
+              "requestBody": {
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "example": {
+                        "category": "Python"
+                      }
+                    }
+                  }
+                }
+              },
+              "parameters": [
+                {
+                  "name": "token",
+                  "in": "query",
+                  "schema": {
+                    "type": "string"
+                  },
+                  "example": "{{token}}"
+                },
+                {
+                  "name": "user_id",
+                  "in": "path",
+                  "schema": {
+                    "type": "string"
+                  },
+                  "required": true
+                },
+                {
+                    "name": "category",
+                    "in": "path",
+                    "schema": {
+                      "type": "string"
+                    },
+                    "required": true
+                  }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successful response",
+                  "content": {
+                    "application/json": {}
+                  }
+                }
+              }
+            }
+          }
     }
 }
