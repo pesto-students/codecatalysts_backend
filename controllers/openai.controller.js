@@ -2,7 +2,7 @@ const openAiApiCall = async (
     category = "",
   ) => {
     const url = `${process.env.OPENAI_API_URL}/chat/completions`;
-    const apiKey = process.env.OPEN_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
     console.log("URL__,url",url);
     const request_content = `
         Create 10 objective questions sets for quiz with answer, 

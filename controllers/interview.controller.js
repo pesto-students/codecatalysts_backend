@@ -66,7 +66,7 @@ const getInterviewById = async (req, res) => {
 const createInterview = async (req, res) => {
   try {
     console.log("Create Interview", req.body);
-    result = await openAiApiCall("Python");
+    var result = await openAiApiCall("Python");
     const questions_str = result.choices[0].message.content;
     const questions = JSON.parse(questions_str);
     const interviewValue = await Interview.create({
