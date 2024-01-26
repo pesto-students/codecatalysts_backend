@@ -2,15 +2,17 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const QuestionsSchema = new Schema({
-  question: String,
-  right_answer: String,
-  options: {
+const optionsSchema = new Schema({
     a: String,
     b: String,
     c: String,
     d: String
-  }
+});
+
+const QuestionsSchema = new Schema({
+  question: String,
+  answer: String,
+  options:optionsSchema
 });
 
 const InterviewSchema = new Schema({
@@ -25,7 +27,7 @@ const InterviewSchema = new Schema({
   category: {
     type: String,
   },
-  Questions:[QuestionsSchema],
+  questions:[QuestionsSchema],
   created_on: {
     type: Date,
     default: Date.now

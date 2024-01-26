@@ -1,4 +1,5 @@
 const Interview = require("../models/interview.model");
+const openAiApiCall = require("./openai.controller");
 
 const getAllInterviews= async (req, res) => {
   console.log("GET All Interviews..");
@@ -65,9 +66,13 @@ const getInterviewById = async (req, res) => {
 const createInterview = async (req, res) => {
   try {
     console.log("Create Interview", req.body);
+    result = await openAiApiCall("Python");
+    const questions_str = result.choices[0].message.content;
+    const questions = JSON.parse(questions_str);
     const interviewValue = await Interview.create({
       ...req.body,
       user_id: req.params.user_id,
+      questions: questions.questions
     });
     res.json(interviewValue);
   } catch (err) {
