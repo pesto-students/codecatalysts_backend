@@ -3,7 +3,7 @@ const connectDB = require("./config/db.config.js");
 const app = express();
 app.use(express.json());
 require("dotenv").config();
-const PORT = 3005;
+const PORT = process.env.PORT;
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
@@ -21,5 +21,5 @@ app.use(function (req, res) {
 });
 
 app.listen(PORT, () => {
-  console.log("app is running on port " + PORT);
+  console.log("app is running on port${} " + PORT);
 });
