@@ -71,7 +71,7 @@ const login = async (req, res) => {
           access_token: jwt.sign(
             { id: req.body.id, email },
             process.env.JWT_SECRET,
-            {expiresIn:"24h"}
+            { expiresIn: "24h" }
           ),
         });
       } else {

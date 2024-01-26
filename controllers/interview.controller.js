@@ -1,13 +1,13 @@
 const Interview = require("../models/interview.model");
 const openAiApiCall = require("./openai.controller");
 
-const getAllInterviews= async (req, res) => {
+const getAllInterviews = async (req, res) => {
   console.log("GET All Interviews..");
   try {
     const pageNumber = parseInt(req.query.page_number) || 1;
     const pageSize = parseInt(req.query.page_size) || 10;
     const skip = (pageNumber - 1) * pageSize;
-    let {startDate,endDate} = req.query; 
+    let { startDate, endDate } = req.query;
 
     if (startDate && endDate) {
       const start = new Date(startDate);
@@ -35,7 +35,9 @@ const getAllInterviews= async (req, res) => {
         interview: interview,
       });
     } else {
-      const totalRecordsCount = await Interview.countDocuments({user_id: req.params.user_id});
+      const totalRecordsCount = await Interview.countDocuments({
+        user_id: req.params.user_id,
+      });
       const totalPages = Math.ceil(totalRecordsCount / pageSize);
       const interview = await Interview.find({ user_id: req.params.user_id })
         .skip(skip)
@@ -72,7 +74,7 @@ const createInterview = async (req, res) => {
     const interviewValue = await Interview.create({
       ...req.body,
       user_id: req.params.user_id,
-      questions: questions.questions
+      questions: questions.questions,
     });
     res.json(interviewValue);
   } catch (err) {
@@ -84,7 +86,10 @@ const createInterview = async (req, res) => {
 const updateInterview = async (req, res) => {
   console.log("Interview Update");
   try {
-    const user = await Interview.updateOne({ _id: req.params.id }, { ...req.body });
+    const user = await Interview.updateOne(
+      { _id: req.params.id },
+      { ...req.body }
+    );
     res.json(user);
   } catch (err) {
     console.log(err);

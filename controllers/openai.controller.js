@@ -1,10 +1,8 @@
-const openAiApiCall = async (
-    category = "",
-  ) => {
-    const url = `${process.env.OPENAI_API_URL}/chat/completions`;
-    const apiKey = process.env.OPENAI_API_KEY;
-    console.log("URL__,url",url);
-    const request_content = `
+const openAiApiCall = async (category = "") => {
+  const url = `${process.env.OPENAI_API_URL}/chat/completions`;
+  const apiKey = process.env.OPENAI_API_KEY;
+  console.log("URL__,url", url);
+  const request_content = `
         Create 10 objective questions sets for quiz with answer, 
         for category "${category}",  
         Each question should have 4 options and  the correct answer stored in the answer variable based on the right option. 
@@ -34,44 +32,44 @@ const openAiApiCall = async (
                     answer: "d"
                 },  
             ]
-        }`
+        }`;
 
-    const requestData = {
-        model: 'gpt-3.5-turbo-1106',
-        response_format: { type: 'json_object' },
-        messages: [
-            {
-                role: 'system',
-                content: 'You are a helpful assistant designed to output JSON.'
-            },
-            {
-                role: 'user',
-                content: request_content
-            }
-        ]
-    };
+  const requestData = {
+    model: "gpt-3.5-turbo-1106",
+    response_format: { type: "json_object" },
+    messages: [
+      {
+        role: "system",
+        content: "You are a helpful assistant designed to output JSON.",
+      },
+      {
+        role: "user",
+        content: request_content,
+      },
+    ],
+  };
 
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify(requestData),
-        });
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify(requestData),
+    });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-        console.log(responseData);
-
-        return responseData;
-    } catch (error) {
-        console.error('Error:', error);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  }
 
-module.exports = openAiApiCall;  
+    const responseData = await response.json();
+    console.log(responseData);
+
+    return responseData;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+module.exports = openAiApiCall;

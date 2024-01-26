@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const optionsSchema = new Schema({
-    a: String,
-    b: String,
-    c: String,
-    d: String
+  a: String,
+  b: String,
+  c: String,
+  d: String,
 });
 
 const QuestionsSchema = new Schema({
   question: String,
   answer: String,
-  options:optionsSchema
+  options: optionsSchema,
 });
 
 const InterviewSchema = new Schema({
@@ -27,14 +27,14 @@ const InterviewSchema = new Schema({
   category: {
     type: String,
   },
-  questions:[QuestionsSchema],
+  questions: [QuestionsSchema],
   created_on: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   correct_answer_count: {
     type: Number,
-    default: 0
+    default: 0,
   },
   start_datetime: {
     type: Date,
@@ -44,7 +44,7 @@ const InterviewSchema = new Schema({
   },
   duration: {
     type: Number,
-    default: 0
+    default: 0,
   },
 });
 
