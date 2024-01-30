@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:3005"
+            "url": "https://talentbridge-zkvv.onrender.com"
         }
     ],
     "paths": {
