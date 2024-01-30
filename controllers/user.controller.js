@@ -75,10 +75,10 @@ const login = async (req, res) => {
           ),
         });
       } else {
-        res.json("password does not match");
+        res.status(401).send({ error: "Incorrect password" });
       }
     } else {
-      res.json("User does not exist");
+      res.status(401).send({ error: "User does not exist" });
     }
   } catch (err) {
     console.log(err);
