@@ -93,12 +93,19 @@ const createInterview = async (req, res) => {
 
 const submitInterview = async(req, res) => {
   try{
-    console.log("InTERVIEW SUBMIT_____", req.params.id)
     const interview = await Interview.findById(req.params.id);
-    const user = await Interview.updateOne(
-      { _id: req.params.id },
-      { ...req.body }
-    );
+    const submittedAnswer = req.body;
+    var correct_answer_count = 0;
+    for (const question of submittedAnswer){
+      const interview_question = interview.questions.find(q => q._id == question.question_id);
+      if (interview_question.answer === question.answer){
+        correct_answer_count =+ 1;
+      }
+      interview_question.user_answer = question.answer;
+    }
+    interview.correct_answer_count = correct_answer_count;
+    await interview.save();
+    res.json(interview)
   }
   catch(err){
     console.log(err);
