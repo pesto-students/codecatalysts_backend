@@ -76,12 +76,35 @@ const createInterview = async (req, res) => {
       user_id: req.params.user_id,
       questions: questions.questions,
     });
-    res.json(interviewValue);
+    var userQuestions = questions;
+    userQuestions.questions.forEach(question => {
+        delete question.answer;
+    });
+    const userInterview = {
+      "interview_id": interviewValue.id,
+      "userQuestions": userQuestions.questions,
+    }
+    res.json(userInterview);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: String(err) });
   }
 };
+
+const submitInterview = async(req, res) => {
+  try{
+    console.log("InTERVIEW SUBMIT_____", req.params.id)
+    const interview = await Interview.findById(req.params.id);
+    const user = await Interview.updateOne(
+      { _id: req.params.id },
+      { ...req.body }
+    );
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).send({ error: String(err) })
+  }
+}
 
 const updateInterview = async (req, res) => {
   console.log("Interview Update");
@@ -115,4 +138,5 @@ module.exports = {
   createInterview, //INSERT
   updateInterview, //UPDATE
   deleteInterview, //DELETE
+  submitInterview, // Submit interview
 };

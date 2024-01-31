@@ -13,6 +13,7 @@ const QuestionsSchema = new Schema({
   question: String,
   answer: String,
   options: optionsSchema,
+  user_answer: String,
 });
 
 const InterviewSchema = new Schema({
@@ -28,6 +29,7 @@ const InterviewSchema = new Schema({
     type: String,
   },
   questions: [QuestionsSchema],
+
   created_on: {
     type: Date,
     default: Date.now,
