@@ -18,6 +18,9 @@ const UserSchema = new Schema({
   phone: {
     type: Number,
   },
+  skills: {
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

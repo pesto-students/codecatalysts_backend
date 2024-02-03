@@ -13,7 +13,8 @@ router.post("/api/user/login", userController.login);
 // USER Routes
 router.get("/api/users", authMiddleware, userController.getUsers); //select
 router.get("/api/users/:id", authMiddleware, userController.getUserById); //select
-router.post("/api/users/:id", authMiddleware, userController.updateUser); //Update
+router.post("/api/users/:id", authMiddleware, userController.updateUser);
+router.post("/api/users/:id/reset", authMiddleware, userController.changeUserPassword);//Update
 router.delete("/api/users/:id", authMiddleware, userController.deleteUser); //delete
 
 

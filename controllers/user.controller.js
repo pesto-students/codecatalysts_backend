@@ -90,17 +90,48 @@ const login = async (req, res) => {
 
 const updateUser = async (req, res) => {
   console.log("User Update", req.params.id);
+  let allowedUpdates = ["firstname", "lastname", "email", "skills"];
+  let updating = Object.keys(req.body);
+  let isUpdateAllowed = updating.every((update) =>
+    allowedUpdates.includes(update)
+  );
+
+  if (!isUpdateAllowed) return res.status(400).send("invalid updates!");
   try {
-    const user = await User.updateOne(
-      { _id: req.params.id },
-      { firstname: req.body.firstname, lastname: req.body.lastname }
-    );
+    const user = await User.updateOne({ _id: req.params.id }, req.body);
     res.json(user);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: String(err) });
   }
 };
+
+const changeUserPassword = async (req, , res) => {
+  const {id} = req.params
+  const { currentPassword, newPassword, confirmPassword } = req.body
+  
+  if (newPassword !== confirmPassword) {
+    res.status(400).send("Please check your new password")
+  }
+  try {
+    const user = await User.findOne({ _id: id });
+    if (user) {
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (isMatch) {
+        const password = await bcrypt.hash(newPassword, 10);
+        const updatedUser = await User.updateOne({ _id: id }, { password });
+        res.json(updatedUser);
+      } else {
+        res.status(400).send("Please check your current password")
+      }
+    } else {
+      res.status(400).send("user not found")
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ error: String(err) });
+  }
+}
 
 const deleteUser = (req, res) => {
   console.log("User delete");
@@ -120,5 +151,6 @@ module.exports = {
   getUsers,
   getUserById,
   updateUser,
+  changeUserPassword,
   deleteUser,
 };
