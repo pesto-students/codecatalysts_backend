@@ -106,7 +106,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const changeUserPassword = async (req, , res) => {
+const changeUserPassword = async (req, res) => {
   const {id} = req.params
   const { currentPassword, newPassword, confirmPassword } = req.body
   
