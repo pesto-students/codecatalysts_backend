@@ -61,6 +61,12 @@ const login = async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
         console.log(user);
+        let token = jwt.sign(
+          { id: req.body.id, email },
+          process.env.JWT_SECRET,
+          { expiresIn: "24h" }
+        );
+        res.cookie("access_token", token, { maxAge: 60000 * 60 * 24 });
         res.json({
           user: {
             id: user._id,
@@ -68,11 +74,7 @@ const login = async (req, res) => {
             firstname: user.firstname,
             lastname: user.lastname,
           },
-          access_token: jwt.sign(
-            { id: req.body.id, email },
-            process.env.JWT_SECRET,
-            { expiresIn: "24h" }
-          ),
+          access_token: token,
         });
       } else {
         res.status(401).send({ error: "Incorrect password" });
