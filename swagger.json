@@ -193,7 +193,7 @@
         }
       }
     },
-    "/v1/api/user/:id/reset": {
+    "/v1/api/user/{user_id}/reset": {
       "post": {
         "tags": ["User"],
         "summary": "Update User password by ID",
