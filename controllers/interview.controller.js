@@ -68,7 +68,11 @@ const getInterviewById = async (req, res) => {
 const createInterview = async (req, res) => {
   try {
     console.log("Create Interview", req.body);
-    var result = await openAiApiCall("Python");
+    const { category } = req.body;
+    if (!category) {
+      return res.status(400).send();
+    }
+    var result = await openAiApiCall(category);
     const questions_str = result.choices[0].message.content;
     const questions = JSON.parse(questions_str);
     const interviewValue = await Interview.create({
@@ -77,13 +81,13 @@ const createInterview = async (req, res) => {
       questions: questions.questions,
     });
     var userQuestions = questions;
-    userQuestions.questions.forEach(question => {
-        delete question.answer;
+    userQuestions.questions.forEach((question) => {
+      delete question.answer;
     });
     const userInterview = {
-      "interview_id": interviewValue.id,
-      "userQuestions": userQuestions.questions,
-    }
+      interview_id: interviewValue.id,
+      userQuestions: userQuestions.questions,
+    };
     res.json(userInterview);
   } catch (err) {
     console.log(err);
@@ -91,27 +95,28 @@ const createInterview = async (req, res) => {
   }
 };
 
-const submitInterview = async(req, res) => {
-  try{
+const submitInterview = async (req, res) => {
+  try {
     const interview = await Interview.findById(req.params.id);
     const submittedAnswer = req.body;
     var correct_answer_count = 0;
-    for (const question of submittedAnswer){
-      const interview_question = interview.questions.find(q => q._id == question.question_id);
-      if (interview_question.answer === question.answer){
-        correct_answer_count =+ 1;
+    for (const question of submittedAnswer) {
+      const interview_question = interview.questions.find(
+        (q) => q._id == question.question_id
+      );
+      if (interview_question.answer === question.answer) {
+        correct_answer_count = +1;
       }
       interview_question.user_answer = question.answer;
     }
     interview.correct_answer_count = correct_answer_count;
     await interview.save();
-    res.json(interview)
-  }
-  catch(err){
+    res.json(interview);
+  } catch (err) {
     console.log(err);
-    res.status(500).send({ error: String(err) })
+    res.status(500).send({ error: String(err) });
   }
-}
+};
 
 const updateInterview = async (req, res) => {
   console.log("Interview Update");
