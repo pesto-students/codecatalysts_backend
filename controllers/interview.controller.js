@@ -70,7 +70,7 @@ const createInterview = async (req, res) => {
     console.log("Create Interview", req.body);
     const { category } = req.body;
     if (!category) {
-      return res.status(400).send({ error: "category vale required" });
+      return res.status(400).send({ error: "category value required" });
     }
     var result = await openAiApiCall(category);
     const questions_str = result.choices[0].message.content;
@@ -80,15 +80,8 @@ const createInterview = async (req, res) => {
       user_id: req.params.user_id,
       questions: questions.questions,
     });
-    var userQuestions = questions;
-    userQuestions.questions.forEach((question) => {
-      delete question.answer;
-    });
-    const userInterview = {
-      interview_id: interviewValue.id,
-      userQuestions: userQuestions.questions,
-    };
-    res.json(userInterview);
+    const interviewRecord = await Interview.findById(interviewValue.id).select('-questions.answer');
+    res.json(interviewRecord);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: String(err) });
