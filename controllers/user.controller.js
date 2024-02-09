@@ -39,9 +39,7 @@ const createUser = async (req, res) => {
     console.log("Register new user", req.body);
     const users = await User.findOne({ email: req.body.email });
     if (users) {
-      return res.json({
-        msg: "User Already Exist",
-      });
+      res.status(400).send({ error: "User Already Exist" })
     }
     const password = await bcrypt.hash(req.body.password, 10);
     const user = await User.create({ ...req.body, password });
@@ -78,10 +76,10 @@ const login = async (req, res) => {
           access_token: token,
         });
       } else {
-        res.status(401).send({ error: "Incorrect password" });
+        res.status(400).send({ error: "Incorrect password" });
       }
     } else {
-      res.status(401).send({ error: "User does not exist" });
+      res.status(400).send({ error: "User does not exist" });
     }
   } catch (err) {
     console.log(err);
@@ -97,7 +95,7 @@ const updateUser = async (req, res) => {
     allowedUpdates.includes(update)
   );
 
-  if (!isUpdateAllowed) return res.status(400).send("invalid updates!");
+  if (!isUpdateAllowed) return res.status(400).send({ error: "invalid updates!" } );
   try {
     const user = await User.updateOne({ _id: req.params.id }, req.body);
     res.json(user);
@@ -112,7 +110,7 @@ const changeUserPassword = async (req, res) => {
   const { currentPassword, newPassword, confirmPassword } = req.body
   
   if (newPassword !== confirmPassword) {
-    res.status(400).send("Please check your new password")
+    return res.status(400).send({ error: "Confirm password doesn't match New password" });
   }
   try {
     const user = await User.findOne({ _id: id });
@@ -123,10 +121,10 @@ const changeUserPassword = async (req, res) => {
         const updatedUser = await User.updateOne({ _id: id }, { password });
         res.json(updatedUser);
       } else {
-        res.status(400).send("Please check your current password")
+        res.status(400).send({ error: "Please check your current password" });
       }
     } else {
-      res.status(400).send("user not found")
+      res.status(400).send({ error: "User not found" });
     }
   } catch (err) {
     console.log(err);

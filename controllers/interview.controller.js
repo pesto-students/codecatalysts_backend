@@ -70,7 +70,7 @@ const createInterview = async (req, res) => {
     console.log("Create Interview", req.body);
     const { category } = req.body;
     if (!category) {
-      return res.status(400).send();
+      res.status(400).send({ error: "category vale required" });
     }
     var result = await openAiApiCall(category);
     const questions_str = result.choices[0].message.content;

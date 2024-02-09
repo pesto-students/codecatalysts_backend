@@ -68,7 +68,7 @@ const openAiApiCall = async (category = "") => {
 
     return responseData;
   } catch (error) {
-    console.error("Error:", error);
+    console.error("error:", error);
   }
 };
 
