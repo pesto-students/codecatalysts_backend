@@ -57,8 +57,8 @@ const getAllInterviews = async (req, res) => {
 const getInterviewById = async (req, res) => {
   console.log("GET Asset BY ID", req.params.id);
   try {
-    const asset = await Interview.findById(req.params.id);
-    res.json(asset || {});
+    const interview = await Interview.findById(req.params.id);
+    res.json(interview || {});
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: String(err) });
@@ -70,7 +70,7 @@ const createInterview = async (req, res) => {
     console.log("Create Interview", req.body);
     const { category } = req.body;
     if (!category) {
-      res.status(400).send({ error: "category vale required" });
+      return res.status(400).send({ error: "category vale required" });
     }
     var result = await openAiApiCall(category);
     const questions_str = result.choices[0].message.content;
