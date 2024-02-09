@@ -55,7 +55,7 @@ const getAllInterviews = async (req, res) => {
 };
 
 const getInterviewById = async (req, res) => {
-  console.log("GET Asset BY ID", req.params.id);
+  console.log("GET Interview record BY ID", req.params.id);
   try {
     const interview = await Interview.findById(req.params.id);
     res.json(interview || {});
@@ -97,8 +97,8 @@ const submitInterview = async (req, res) => {
       const interview_question = interview.questions.find(
         (q) => q._id == question.question_id
       );
-      if (interview_question.answer === question.answer) {
-        correct_answer_count = +1;
+      if (interview_question.answer == question.answer) {
+        correct_answer_count += 1;
       }
       interview_question.user_answer = question.answer;
     }
