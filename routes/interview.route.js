@@ -7,7 +7,7 @@ const authMiddleware = require("../middleware/auth");
 
 
 // Interview Routes
-router.get("/api/intreview/user/:user_id", authMiddleware, interviewController.getAllInterviews);  //select
+router.get("/api/interview/user/:user_id", authMiddleware, interviewController.getAllInterviews);  //select
 router.get("/api/interview/:id", authMiddleware, interviewController.getInterviewById); //select
 router.post("/api/interview/:user_id", authMiddleware, interviewController.createInterview); //insert
 router.put("/api/interview/:id", authMiddleware, interviewController.updateInterview); //update
