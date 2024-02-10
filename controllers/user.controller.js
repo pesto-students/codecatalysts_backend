@@ -89,7 +89,7 @@ const login = async (req, res) => {
 
 const updateUser = async (req, res) => {
   console.log("User Update", req.params.id);
-  let allowedUpdates = ["firstname", "lastname", "email", "skills"];
+  let allowedUpdates = ["firstname", "lastname", "email", "skills", "image_string"];
   let updating = Object.keys(req.body);
   let isUpdateAllowed = updating.every((update) =>
     allowedUpdates.includes(update)

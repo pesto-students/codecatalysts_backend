@@ -21,6 +21,9 @@ const UserSchema = new Schema({
   skills: {
     type: Array,
   },
+  image_string: {
+    type: Array,
+  }
 });
 
 module.exports = mongoose.model("User", UserSchema);
