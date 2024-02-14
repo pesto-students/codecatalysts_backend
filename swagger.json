@@ -1,0 +1,519 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Talent Bridge API Documentation",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://talentbridge-zkvv.onrender.com"
+    }
+  ],
+  "paths": {
+    "/v1/api/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "SignUp/Create User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "firstname": "Paras",
+                  "lastname": "Sutariya",
+                  "email": "parassutariya@gmail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "Get User All user",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/user/login": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "parassutariya@gmail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get User by ID",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Update User by ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "firstname": "PARAS",
+                  "lastname": "SUTARIYA"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete user by ID",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/user/{user_id}/reset": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Update User password by ID",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "currentPassword": "PARAS",
+                  "newPassword": "SUTARIYA",
+                  "confirmPassword": "SUTARIYA"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/interview/{user_id}": {
+      "post": {
+        "tags": ["Interview"],
+        "summary": "Interview Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "category": "Python"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "category",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/interview/user/{user_id}": {
+      "get": {
+        "tags": ["Interview"],
+        "summary": "Get all Interviews",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "optional",
+            "example": "\"2023-01-01\""
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "optional",
+            "example": "\"2023-12-31\""
+          },
+          {
+            "name": "page_number",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "optional",
+            "example": "1"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "optional",
+            "example": "10"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/interview/{interview_id}": {
+      "get": {
+        "tags": ["Interview"],
+        "summary": "Get Interview by ID",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "interview_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Interview"],
+        "summary": "Update Interview",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "category": "Node JS"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "interview_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Interview"],
+        "summary": "Delete Interview by id",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{token}}"
+          },
+          {
+            "name": "interview_id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/v1/api/interview/{interview_id}/submit": {
+      "post": {
+        "summary": "Submit Interview",
+        "tags": ["Submit Interview"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "interview_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the interview"
+          },
+          {
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Authentication token"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "question_id": {
+                      "type": "string"
+                    },
+                    "answer": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Interview submitted successfully"
+          }
+        }
+      }
+    }
+  }
+}

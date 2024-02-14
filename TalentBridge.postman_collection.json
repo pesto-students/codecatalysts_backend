@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "c7c2ef44-87a5-4ead-8d4a-18b57bc38813",
+		"name": "TalentBridge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12533586"
+	},
+	"item": [
+		{
+			"name": "SignUp/Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"firstname\":\"Paras\",\r\n   \"lastname\":\"Sutariya\",\r\n   \"email\":\"paras.sutariya125@gmail.com\",\r\n   \"password\":\"123456\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{URL}}/v1/api/users"
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"paras.sutariya125@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{URL}}/v1/api/user/login"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User All user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/api/users?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/api/users/{{user_id}}?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"users",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User by ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\":\"PARAS..\",\r\n    \"lastname\":\"SUTARIYA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/api/users/{{user_id}}?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"users",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/api/users/{{user_id}}?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"users",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interview Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"category\": \"Python\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/api/interview/{{user_id}}?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"interview",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Interviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/api/intreview/user/{{user_id}}?token={{token}}&page_number=2&page_size=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"intreview",
+						"user",
+						"{{user_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "start_date",
+							"value": "\"2023-01-01\"",
+							"description": "optional",
+							"disabled": true
+						},
+						{
+							"key": "end_date",
+							"value": "\"2023-12-31\"",
+							"description": "optional",
+							"disabled": true
+						},
+						{
+							"key": "page_number",
+							"value": "2",
+							"description": "optional"
+						},
+						{
+							"key": "page_size",
+							"value": "1",
+							"description": "optional"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Interview by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}v1/api/interview/{{interview_id}}?token={{token}}",
+					"host": [
+						"{{URL}}v1"
+					],
+					"path": [
+						"api",
+						"interview",
+						"{{interview_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Interviews",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"category\":\"Node JS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/api/interview/{{interview_id}}?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"interview",
+						"{{interview_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Interviews by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}v1/api/interview/{{interview_id}}?token={{token}}",
+					"host": [
+						"{{URL}}v1"
+					],
+					"path": [
+						"api",
+						"interview",
+						"{{interview_id}}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot Password",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Submit Interview",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"question_id\": \"65b3f7e71adfba8a640b319f\",\r\n        \"answer\": \"b\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/v1/api/interview/{{interview_id}}/submit?token={{token}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"api",
+						"interview",
+						"{{interview_id}}",
+						"submit"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard API",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhcmFzLnN1dGFyaXlhMTI1QGdtYWlsLmNvbSIsImlhdCI6MTcwNjY5OTE0NCwiZXhwIjoxNzA2Nzg1NTQ0fQ.4hFlPNfOPCnAL0KhrhI1VY99JK5mBcz2-H6FqrZ3Ph8",
+			"type": "default"
+		},
+		{
+			"key": "user_id",
+			"value": "65b8d35cae3c75e608cb6017",
+			"type": "default"
+		},
+		{
+			"key": "interview_id",
+			"value": "65b3f7e71adfba8a640b319e",
+			"type": "default"
+		},
+		{
+			"key": "URL",
+			"value": "http://localhost:3005",
+			"type": "string"
+		}
+	]
+}
