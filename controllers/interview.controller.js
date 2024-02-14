@@ -13,20 +13,24 @@ const getAllInterviews = async (req, res) => {
       const start = new Date(startDate);
       const end = new Date(endDate);
       const totalRecordsCount = await Interview.countDocuments({
-        purchase_date: {
-          $gte: start,
-          $lte: end,
-        },
-        user_id: req.params.user_id,
-      });
-      const totalPages = Math.ceil(totalRecordsCount / pageSize);
-      const interview = await Interview.find({
-        purchase_date: {
+        created_on: {
           $gte: start,
           $lte: end,
         },
         user_id: req.params.user_id,
       })
+        .sort({ created_on: -1 })
+        .skip(skip)
+        .limit(pageSize);;
+      const totalPages = Math.ceil(totalRecordsCount / pageSize);
+      const interview = await Interview.find({
+        created_on: {
+          $gte: start,
+          $lte: end,
+        },
+        user_id: req.params.user_id,
+      })
+        .sort({ created_on: -1 })
         .skip(skip)
         .limit(pageSize);
       res.json({
@@ -40,6 +44,7 @@ const getAllInterviews = async (req, res) => {
       });
       const totalPages = Math.ceil(totalRecordsCount / pageSize);
       const interview = await Interview.find({ user_id: req.params.user_id })
+        .sort({ created_on: -1 })
         .skip(skip)
         .limit(pageSize);
       res.json({
