@@ -71,7 +71,8 @@ const login = async (req, res) => {
             email: user.email,
             firstname: user.firstname,
             lastname: user.lastname,
-            skills: user.skills || []
+            skills: user.skills || [],
+            image_string: user.image_string
           },
           access_token: token,
         });
